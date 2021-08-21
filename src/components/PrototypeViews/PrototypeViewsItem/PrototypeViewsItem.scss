@@ -1,0 +1,14 @@
+.prototype-views-item {
+  text-align: left;
+  font-size: 18px;
+  color: #fff;
+  width: 100%;
+  padding: 5px 0 5px 10px;
+  margin-bottom: 5px;
+
+  &:hover {
+    background-color: #2b292c;
+    color: #9466ff;
+    cursor: pointer;
+  }
+}
