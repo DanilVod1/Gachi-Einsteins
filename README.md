@@ -1,13 +1,4 @@
-# Дизайн система RT (хотим оффер)
-
-## For local development
-
-1.   `git clone https://github.com/DanilVod1/GachiR.git`
-2.   Run `yarn`
-3.   Run `yarn start`
-4.   Open [http://localhost:3000](http://localhost:3000)
-
-## Getting Started with Create React App
+# Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -78,10 +69,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
-### to build docker container
-
-`docker run -it --rm -v %cd%:/rosdesigner -v /rosdesigner/node_modules -p 3001:3000 -e CHOKIDAR_USEPOLLING=true rosdesigner:dev`
-
-### to build docker container
-
-`docker build -t rosdesigner:dev .`
+### 'docker run -it --rm -v %cd%:/app -v /app/node_modules -p 3001:3000 -e CHOKIDAR_USEPOLLING=true rosdesigner:dev' to build docker container
+### 'docker build -t rosdesigner:dev .' to build docker container

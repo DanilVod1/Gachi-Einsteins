@@ -7,10 +7,15 @@ import {
   CHANGE_THEME,
   CHANGE_CANVAS_SIZE,
   SET_REF_TO_EXPORT,
+  SET_LOADER_STATUS,
+  SET_ITEM,
+  SET_ITEM_PROPS,
 } from './../constants';
 
 const initialState = {
-  theme: 'dark',
+  theme: 'light',
+
+  isLoading: true,
 
   leftTab: '1',
   rightTab: '0',
@@ -27,6 +32,9 @@ const initialState = {
   widthColumns: 40,
   spaceBetweenColumns: 8,
   indentField: 20,
+
+  items: [],
+  currentItem: {},
 };
 
 export default function appReducer(state = initialState, action) {
@@ -34,6 +42,8 @@ export default function appReducer(state = initialState, action) {
   switch (action.type) {
     case CHANGE_THEME:
       return { ...state, theme: action.payload.theme };
+    case SET_LOADER_STATUS:
+      return { ...state, isLoading: action.payload.isLoading };
     case CHANGE_LEFT_TAB:
       return { ...state, leftTab: action.payload.leftTab };
     case CHANGE_RIGHT_TAB:
@@ -58,6 +68,16 @@ export default function appReducer(state = initialState, action) {
       return {
         ...state,
         exportRef: action.payload.exportRef,
+      };
+    case SET_ITEM:
+      return {
+        ...state,
+        items: [...state.items, action.payload.items],
+      };
+    case SET_ITEM_PROPS:
+      return {
+        ...state,
+        currentItem: action.payload.props,
       };
     default:
       return state;

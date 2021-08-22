@@ -45,7 +45,7 @@ const Navbar = () => {
         className="navbar-tabs"
         size="small"
       >
-        <TabsClassicItem index="0" label="Размеры холста" />
+        <TabsClassicItem index="0" label="Холст" />
         <TabsClassicItem index="1" label="Настройки" />
       </TabsClassicGroup>
     </div>

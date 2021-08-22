@@ -7,8 +7,8 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - '.:/rosdesigner'
-      - '/rosdesigner/node_modules'
+      - '.:/app'
+      - '/app/node_modules'
     ports:
       - 3001:3000
     environment:

@@ -1,5 +1,3 @@
-import CardComponents from '../СardComponent/CardComponents';
-import React from 'react';
 import {
   Achievement,
   AddLarge,
@@ -389,6 +387,8 @@ import {
   ZoomIn,
   ZoomOut,
 } from '@design-system-rt/rtk-ui-kit';
+import CardComponents from '../CardComponent/CardComponents';
+import React from 'react';
 
 export const icons = [
   {
@@ -833,6 +833,15 @@ export const elementsStyles = [
       'secondary1',
       'secondary2',
     ],
+  },
+];
+
+export const tabsStyles = [
+  {
+    colors: ['primary1', 'primary2', 'secondary1', 'secondary2'],
+    sizes: ['small', 'medium', 'small', 'medium'],
+    classicBar: [true, false, true, false],
+    scrollable: [true, false, true, false],
   },
 ];
 

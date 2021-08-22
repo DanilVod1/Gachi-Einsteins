@@ -1,31 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './LeftSlide.scss';
 import {
   Button,
   Checkbox,
   Chip,
+  Desktop,
   FunctionButton,
   Heart,
   IconButton,
   InputAmount,
   InputDate,
   InputNumberStepper,
+  Internet,
   MenuKebab,
+  Mobile,
   Multiselect,
+  Promocode,
   RadioButton,
   RadioGroup,
   Select,
   Stepper,
   Sticker,
   Switch,
+  TabsClassicGroup,
+  TabsClassicItem,
   TabsClassicPanel,
   TextArea,
   ThemeProvider,
   Typography,
 } from '@design-system-rt/rtk-ui-kit';
-import CardComponents from '../СardComponent/CardComponents';
+import CardComponents from '../CardComponent/CardComponents';
+import '../CardComponent/CardComponents.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import { elementsStyles, icons, TextComponents } from './data';
+import { elementsStyles, icons, tabsStyles, TextComponents } from './data';
 import { changeTheme as changeThemeAction } from '../../store/actions/action';
 
 const LeftSlide = () => {
@@ -40,6 +47,86 @@ const LeftSlide = () => {
       changeThemeAction({ theme: state.theme === 'dark' ? 'light' : 'dark' })
     );
   };
+  const ref = useRef();
+
+  useEffect(() => {
+    setTimeout(() => {
+      const leftSlide = document.querySelector('.leftSlide');
+      const editor = document.querySelector('.edit-container');
+
+      leftSlide.onmousedown = function (e) {
+        let currentDroppable = null;
+        const cardComponent = e.target.closest('.card-component');
+        let copyCard = cardComponent?.cloneNode(true);
+
+        if (copyCard) {
+          ref.current = copyCard;
+
+          let shiftX = e.clientX - cardComponent.getBoundingClientRect().left;
+          let shiftY = e.clientY - cardComponent.getBoundingClientRect().top;
+
+          copyCard.style.position = 'absolute';
+          copyCard.style.zIndex = 1000;
+          copyCard.dataset.drag = 'drag';
+          document.body.append(copyCard);
+
+          moveAt(e.pageX, e.pageY);
+
+          function moveAt(pageX, pageY) {
+            copyCard.style.left = pageX - shiftX + 'px';
+            copyCard.style.top = pageY - shiftY + 'px';
+          }
+
+          function onMouseMove(event) {
+            moveAt(event.pageX, event.pageY);
+
+            copyCard.hidden = true;
+            let elemBelow = document.elementFromPoint(
+              event.clientX,
+              event.clientY
+            );
+            copyCard.hidden = false;
+
+            if (!elemBelow) return;
+
+            let droppableBelow = elemBelow.closest('.col');
+            if (currentDroppable != droppableBelow) {
+              if (currentDroppable) {
+                // null если мы были не над droppable до этого события
+                // (например, над пустым пространством)
+                leaveDroppable(currentDroppable);
+              }
+              currentDroppable = droppableBelow;
+              if (currentDroppable) {
+                // null если мы не над droppable сейчас, во время этого события
+                // (например, только что покинули droppable)
+                enterDroppable(currentDroppable);
+              }
+            }
+          }
+
+          document.addEventListener('mousemove', onMouseMove);
+
+          copyCard.onmouseup = function () {
+            document.removeEventListener('mousemove', onMouseMove);
+            copyCard.onmouseup = null;
+          };
+        }
+        function enterDroppable(elem) {
+          elem.style.background = 'pink';
+        }
+
+        function leaveDroppable(elem) {
+          elem.style.background = '';
+        }
+        if (copyCard) {
+          copyCard.ondragstart = function () {
+            return false;
+          };
+        }
+      };
+    }, 0);
+  }, []);
 
   return (
     <div className="leftSlide">
@@ -554,6 +641,42 @@ const LeftSlide = () => {
                       </CardComponents>
                     ))
                   )}
+                </div>
+                <div className="components-category-opened-category">
+                  {tabsStyles[0].colors.map((color, index) => (
+                    <CardComponents>
+                      <TabsClassicGroup
+                        accentColor={color}
+                        onChange={function noRefCheck() {}}
+                        size={tabsStyles[0].sizes[index]}
+                        value="0"
+                        scrollable={tabsStyles[0].scrollable[index]}
+                        classicBar={tabsStyles[0].classicBar[index]}
+                      >
+                        <TabsClassicItem
+                          icon={index < 1 && <Internet />}
+                          index="0"
+                          label="Интернет"
+                        />
+                        <TabsClassicItem
+                          icon={index < 1 && <Desktop />}
+                          index="1"
+                          label="Интерактивное ТВ"
+                        />
+                        <TabsClassicItem
+                          icon={index < 1 && <Mobile />}
+                          index="2"
+                          label="Мобильный телефон"
+                        />
+                        <TabsClassicItem
+                          disabled
+                          icon={index < 1 && <Promocode />}
+                          index="3"
+                          label="Прочее"
+                        />
+                      </TabsClassicGroup>
+                    </CardComponents>
+                  ))}
                 </div>
               </div>
             </TabsClassicPanel>

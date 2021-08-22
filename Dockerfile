@@ -5,10 +5,10 @@ LABEL name="rosdesigner" \
   version=0.0.1
 
 # set working directory
-WORKDIR /rosdesigner
+WORKDIR /rostelecom2
 
 # add `/app/node_modules/.bin` to $PATH
-ENV PATH /rosdesigner/node_modules/.bin:$PATH
+ENV PATH /rostelecom2/node_modules/.bin:$PATH
 
 RUN npm install -g npm@7.6.0
 

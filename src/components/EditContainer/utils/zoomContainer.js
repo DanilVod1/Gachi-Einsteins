@@ -13,7 +13,7 @@ export default function ScrollZoom(
   let zoom_target = { x: 0, y: 0 };
   let zoom_point = { x: 0, y: 0 };
   console.log(target.style);
-  let scale = scalePast | 1;
+  let scale = scalePast;
   let history = [{ x: 0, y: 0 }];
   let prevX = 0;
   target.style.transformOrigin = '0 0';

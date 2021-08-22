@@ -6,6 +6,7 @@ const views = {
       countColumns: 6,
       spaceBetweenColumns: 8,
       indentField: 20,
+      gap: 12,
     },
     large: {
       width: 375,

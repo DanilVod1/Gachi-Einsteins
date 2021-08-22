@@ -1,23 +1,29 @@
-import React, { useState } from 'react';
 import LeftSlide from './components/LeftSlide/LeftSlide';
+import React, { useState } from 'react';
 import EditContainer from './components/EditContainer/EditContainer';
+import './app.scss';
 import RightSlide from './components/RightSlide/RightSlide';
 import { ThemeProvider } from '@design-system-rt/rtk-ui-kit';
 import Navbar from './components/NavBar/NavBar';
-import './app.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeTheme, setLoaderStatus } from './store/actions/action';
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
+  const state = useSelector((state) => state.global);
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
     setTimeout(() => {
-      setIsLoading(false);
-    }, 2500);
+      dispatch(changeTheme({ theme: 'dark' }));
+    }, 0);
+    setTimeout(() => {
+      dispatch(setLoaderStatus({ isLoading: false }));
+    }, 2200);
   }, []);
 
   return (
     <ThemeProvider themeName="dark">
-      {isLoading && (
+      {state.isLoading && (
         <div className="loader-screen">
           <div className="loader" />
         </div>

@@ -2,6 +2,10 @@
   "name": "rostelecom",
   "version": "0.1.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DanilVod1/Gachi-Einsteins"
+  },
   "dependencies": {
     "@babel/core": "7.12.3",
     "@babel/eslint-parser": "7.13.10",
@@ -38,7 +42,9 @@
     "eslint-plugin-security": "1.4.0",
     "eslint-plugin-testing-library": "^3.9.2",
     "eslint-webpack-plugin": "^2.5.2",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "6.1.1",
+    "file-saver": "^2.0.5",
     "fs-extra": "^9.0.1",
     "html-webpack-plugin": "4.5.0",
     "identity-obj-proxy": "3.0.0",
@@ -46,6 +52,7 @@
     "jest-circus": "26.6.0",
     "jest-resolve": "26.6.0",
     "jest-watch-typeahead": "0.6.1",
+    "jszip": "3.7.1",
     "mini-css-extract-plugin": "0.11.3",
     "optimize-css-assets-webpack-plugin": "5.0.4",
     "pnp-webpack-plugin": "1.6.4",
@@ -76,6 +83,7 @@
     "workbox-webpack-plugin": "5.1.4"
   },
   "scripts": {
+    "webpackbuild": "webpack --mode production",
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js"
@@ -99,11 +107,15 @@
     ]
   },
   "devDependencies": {
-    "node-sass": "^5.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.14.5",
+    "@babel/preset-env": "^7.15.0",
+    "clean-webpack-plugin": "^4.0.0-alpha.0",
+    "node-sass": "5.0.0",
     "re-resizable": "^6.9.0",
     "react-redux": "^7.2.4",
     "redux": "^4.1.1",
-    "sass-loader": "^10.0.5"
+    "sass-loader": "10.1.1",
+    "webpack-cli": "^4.8.0"
   },
   "jest": {
     "roots": [
@@ -154,10 +166,5 @@
       "jest-watch-typeahead/testname"
     ],
     "resetMocks": true
-  },
-  "babel": {
-    "presets": [
-      "react-app"
-    ]
   }
 }
